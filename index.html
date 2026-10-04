@@ -68,7 +68,15 @@
   .date-row time{font:600 1.35rem var(--serif);color:var(--gold-light)}
   .date-row span{color:var(--muted)} .date-row a{color:var(--gold);text-decoration:none}
   .date-row a:hover{color:var(--gold-light)}
-  .quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:4rem}
+  .references{background:var(--black);border-top:1px solid rgba(201,164,92,.12);border-bottom:1px solid rgba(201,164,92,.12)}
+  .sdk-reference{display:grid;grid-template-columns:minmax(220px,.7fr) 1.7fr;gap:4rem;align-items:center;padding:3rem 0;border-top:1px solid rgba(201,164,92,.22);border-bottom:1px solid rgba(201,164,92,.22)}
+  .sdk-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.1rem;padding-right:3rem;border-right:1px solid rgba(201,164,92,.22)}
+  .sdk-brand img{width:min(230px,100%);height:auto;object-fit:contain;filter:brightness(1.08)}
+  .sdk-brand span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .sdk-brand strong{font:600 1.35rem var(--serif);color:var(--gold-light)}
+  .sdk-quote blockquote{padding-left:0;font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.5}
+  .sdk-quote blockquote::before{display:none}
+  .sdk-quote blockquote footer{margin-top:1.5rem;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
   blockquote{position:relative;padding-left:1.8rem;font:500 1.45rem/1.45 var(--serif)}
   blockquote::before{content:"“";position:absolute;left:0;top:-.25rem;color:var(--gold);font:600 2.2rem var(--serif)}
   blockquote footer{margin-top:1rem;font:300 .95rem var(--sans);color:var(--muted)}
@@ -89,7 +97,7 @@
   footer.site a{text-decoration:none} footer.site a:hover{color:var(--gold)}
   @media(max-width:800px){
     section{padding-block:4.5rem}.about{grid-template-columns:1fr;gap:3rem}.portrait{width:min(100%,520px)}
-    .format-list,.quotes{grid-template-columns:1fr}.format{min-height:0}.date-row{grid-template-columns:1fr;gap:.3rem}
+    .format-list,.quotes{grid-template-columns:1fr}.sdk-reference{grid-template-columns:1fr;gap:2.5rem}.sdk-brand{padding-right:0;border-right:0;border-bottom:1px solid rgba(201,164,92,.22);padding-bottom:2rem}.format{min-height:0}.date-row{grid-template-columns:1fr;gap:.3rem}
     .gallery-grid{grid-template-columns:1fr;grid-template-rows:none}.shot,.shot:first-child{grid-row:auto;aspect-ratio:10/7}
     nav{gap:1.1rem;font-size:.72rem}.hero-scroll{display:none}
   }
@@ -142,13 +150,19 @@
     </div>
   </section>
 
-  <section id="stimmen">
+  <section id="stimmen" class="references">
     <div class="wrap">
-      <div class="section-kicker">03 — Stimmen</div>
-      <h2>Was bleibt, ist der Moment.</h2>
-      <div class="quotes">
-        <blockquote>Hier steht eine echte Kundenstimme zu deinem Auftritt.<footer>Name, Anlass</footer></blockquote>
-        <blockquote>Hier steht eine zweite Kundenstimme.<footer>Name, Anlass</footer></blockquote>
+      <div class="section-kicker">03 — Referenz</div>
+      <h2>Ein Abend, der in Erinnerung bleibt.</h2>
+      <div class="sdk-reference">
+        <div class="sdk-brand">
+          <img src="bilder/sdk-logo.svg" alt="SDK Süddeutsche Krankenversicherung">
+          <span>100 Jahre Jubiläum · Juni 2026</span>
+          <strong>Show vor 1.300 Gästen</strong>
+        </div>
+        <div class="sdk-quote">
+          <blockquote>Der Auftritt von Benjamin Miller war ein echtes Highlight unserer 100-jährigen Jubiläumsfeier. Mit seiner abwechslungsreichen und mitreißenden Show hat er unsere Mitarbeitenden begeistert, zum Staunen gebracht und einige sogar aktiv auf die Bühne geholt.<br><br>Eine Darbietung, die uns noch lange in Erinnerung bleiben wird. Vielen Dank dafür!<footer>— SDK Süddeutsche Krankenversicherung · Juni 2026</footer></blockquote>
+        </div>
       </div>
     </div>
   </section>
