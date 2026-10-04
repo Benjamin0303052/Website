@@ -9,238 +9,186 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  /*
-    BILDER (Ordner "bilder" neben dieser index.html):
-      bilder/hero.jpg      Hauptbild oben, quer, ca. 1920x1080
-      bilder/portrait.jpg  Porträt "Über mich", hochkant, ca. 800x1000
-      bilder/show-1.jpg, show-2.jpg, show-3.jpg   Galerie, quer, ca. 1000x700
-    Fehlt ein Bild, bleibt eine ruhige dunkle Fläche stehen.
-  */
   :root {
-    --black: #050505;
-    --coal: #0f0f0e;
-    --graphite: #1a1917;
-    --gold: #c9a45c;
-    --gold-light: #e6cd91;
-    --text: #e9e4d8;
-    --muted: #9b968a;
-    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-    --sans: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --gold-gradient: linear-gradient(135deg, #a67c32, #e6cd91 50%, #b8893a);
+    --black:#050505; --coal:#0f0f0e; --graphite:#1a1917;
+    --gold:#c9a45c; --gold-light:#e6cd91; --text:#e9e4d8; --muted:#9b968a;
+    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --gold-gradient:linear-gradient(135deg,#a67c32,#e6cd91 50%,#b8893a);
   }
-  * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-  body { background: var(--black); color: var(--text); font: 300 1.0625rem/1.75 var(--sans); -webkit-font-smoothing: antialiased; }
-  a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-  .wrap { width: min(1120px, 100% - 3rem); margin-inline: auto; }
-  img { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
-
-  /* Kopfzeile */
-  header { position: fixed; inset: 0 0 auto 0; z-index: 10; background: linear-gradient(to bottom, rgba(5,5,5,.92), rgba(5,5,5,0)); }
-  header .wrap { display: flex; justify-content: space-between; align-items: center; padding-block: 1.4rem; gap: 1rem; flex-wrap: wrap; }
-  .logo { font: 600 1.6rem var(--serif); text-decoration: none; letter-spacing: .04em; color: var(--gold-light); }
-  nav { display: flex; gap: 2rem; font-size: .95rem; letter-spacing: .06em; }
-  nav a { text-decoration: none; color: var(--text); transition: color .2s; }
-  nav a:hover { color: var(--gold); }
-
-  /* Hero */
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; background: var(--coal); overflow: hidden; }
-  .hero > img { position: absolute; inset: 0; opacity: .6; }
-  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--black) 8%, rgba(5,5,5,.2) 60%, rgba(5,5,5,.5)); }
-  .hero .wrap { position: relative; z-index: 1; padding-block: 8rem 5rem; }
-  h1 { font: 500 clamp(2.8rem, 8.5vw, 6.5rem)/1 var(--serif); max-width: 13ch; animation: rise 1.6s cubic-bezier(.2,.7,.2,1) both; }
-  .lead { max-width: 44ch; margin-top: 1.6rem; font-size: 1.2rem; color: var(--muted); animation: rise 1.6s .4s cubic-bezier(.2,.7,.2,1) both; }
-  .hero .btn { animation: rise 1.6s .7s cubic-bezier(.2,.7,.2,1) both; }
-  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { h1, .lead, .hero .btn { animation: none; } html { scroll-behavior: auto; } }
-
-  .btn { display: inline-block; margin-top: 2.2rem; padding: 1rem 2.4rem; background: var(--gold-gradient); color: var(--black); font-weight: 500; letter-spacing: .08em; text-decoration: none; transition: filter .2s; }
-  .btn:hover { filter: brightness(1.15); }
-
-  /* Abschnitte */
-  section { padding-block: 7rem; }
-  h2 { font: 500 clamp(2rem, 4.5vw, 3.2rem)/1.1 var(--serif); margin-bottom: 2rem; color: var(--gold-light); }
-  p + p { margin-top: 1.1rem; }
-
-  /* Formate */
-  .formats { background: var(--coal); }
-  .format-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-  .format { background: var(--graphite); padding: 2.4rem 2rem; }
-  .format h3 { font: 600 1.7rem var(--serif); margin-bottom: .8rem; }
-  .format p { color: var(--muted); }
-  .facts { margin-top: 1.5rem; padding-top: 1.2rem; background: linear-gradient(var(--gold), var(--gold)) top / 2.5rem 1px no-repeat; font-size: .95rem; color: var(--gold-light); }
-
-  /* Über mich */
-  .about { display: grid; grid-template-columns: 1fr 1.25fr; gap: 5rem; align-items: center; }
-  .portrait { aspect-ratio: 4 / 5; background: var(--graphite); overflow: hidden; }
-
-  /* Termine */
-  .dates { background: var(--coal); }
-  .date-row { display: grid; grid-template-columns: 11rem 1fr auto; gap: 1.5rem; align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid rgba(201,164,92,.25); }
-  .date-row:first-of-type { border-top: 1px solid rgba(201,164,92,.25); }
-  .date-row time { font: 600 1.35rem var(--serif); color: var(--gold-light); }
-  .date-row span { color: var(--muted); }
-  .date-row a { color: var(--gold); text-decoration: none; }
-  .date-row a:hover { color: var(--gold-light); }
-
-  /* Stimmen */
-  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
-  blockquote { font: 500 1.45rem/1.45 var(--serif); }
-  blockquote footer { margin-top: 1rem; font: 300 .95rem var(--sans); color: var(--muted); }
-
-  /* Galerie */
-  .gallery { background: var(--coal); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-  .shot { aspect-ratio: 10 / 7; background: var(--graphite); overflow: hidden; }
-
-  /* Kontakt */
-  .contact { text-align: center; padding-block: 8rem; }
-  .contact p { max-width: 46ch; margin-inline: auto; color: var(--muted); }
-  .contact .direct { margin-top: 2rem; color: var(--text); }
-  .contact .direct a { text-decoration: none; color: var(--gold-light); }
-
-  footer.site { padding-block: 2.5rem; text-align: center; color: var(--muted); font-size: .9rem; background: var(--coal); }
-  footer.site a { text-decoration: none; }
-  footer.site a:hover { color: var(--gold); }
-
-  @media (max-width: 800px) {
-    section { padding-block: 4.5rem; }
-    .about { grid-template-columns: 1fr; gap: 2.5rem; }
-    .date-row { grid-template-columns: 1fr; gap: .3rem; }
-    nav { gap: 1.2rem; font-size: .85rem; }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth;scroll-padding-top:5rem}
+  body{background:var(--black);color:var(--text);font:300 1.0625rem/1.75 var(--sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+  .wrap{width:min(1120px,100% - 3rem);margin-inline:auto}
+  img{display:block;width:100%;height:100%;object-fit:cover;border:0}
+  header{position:fixed;inset:0 0 auto 0;z-index:10;background:rgba(5,5,5,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,164,92,.10);transition:background .25s,border-color .25s}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:1.15rem;gap:1rem}
+  .logo{font:600 1.6rem var(--serif);text-decoration:none;letter-spacing:.04em;color:var(--gold-light);white-space:nowrap}
+  nav{display:flex;gap:2rem;font-size:.9rem;letter-spacing:.07em;text-transform:uppercase}
+  nav a{text-decoration:none;color:var(--text);transition:color .2s}
+  nav a:hover{color:var(--gold)}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--coal);overflow:hidden}
+  .hero>img{position:absolute;inset:0;opacity:.58;transform:scale(1.015);transition:transform 1.2s ease}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 36%,rgba(201,164,92,.08),transparent 30%);z-index:1}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--black) 7%,rgba(5,5,5,.28) 58%,rgba(5,5,5,.48));z-index:1}
+  .hero .wrap{position:relative;z-index:2;padding-block:8rem 5.5rem}
+  .eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1.25rem;color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+  .eyebrow::before{content:"";width:2.8rem;height:1px;background:var(--gold)}
+  h1{font:500 clamp(2.8rem,8.5vw,6.5rem)/.96 var(--serif);max-width:13ch;animation:rise 1.3s cubic-bezier(.2,.7,.2,1) both}
+  .lead{max-width:44ch;margin-top:1.6rem;font-size:1.2rem;color:var(--muted);animation:rise 1.3s .2s cubic-bezier(.2,.7,.2,1) both}
+  .hero .btn{animation:rise 1.3s .4s cubic-bezier(.2,.7,.2,1) both}
+  .hero-scroll{position:absolute;right:3rem;bottom:2.8rem;z-index:2;writing-mode:vertical-rl;color:rgba(230,205,145,.65);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){h1,.lead,.hero .btn{animation:none}.hero>img{transform:none}html{scroll-behavior:auto}}
+  .btn{display:inline-block;margin-top:2.2rem;padding:1rem 2.5rem;background:var(--gold-gradient);color:var(--black);font-weight:500;letter-spacing:.08em;text-decoration:none;box-shadow:0 10px 35px rgba(0,0,0,.28);transition:transform .25s,filter .25s,box-shadow .25s}
+  .btn:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,.38)}
+  section{padding-block:7rem}
+  h2{font:500 clamp(2rem,4.5vw,3.2rem)/1.05 var(--serif);margin-bottom:2rem;color:var(--gold-light)}
+  .section-kicker{margin-bottom:.65rem;color:var(--gold);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+  p+p{margin-top:1.1rem}
+  .formats{background:var(--coal)}
+  .format-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,164,92,.16)}
+  .format{position:relative;background:var(--graphite);padding:2.7rem 2.2rem;min-height:290px;overflow:hidden;transition:transform .3s,background .3s}
+  .format::before{content:"";position:absolute;left:2.2rem;top:0;width:3.2rem;height:1px;background:var(--gold)}
+  .format:hover{transform:translateY(-5px);background:#211f1c}
+  .format-number{font-size:.72rem;letter-spacing:.16em;color:var(--gold);margin-bottom:2.4rem}
+  .format h3{font:600 1.8rem var(--serif);margin-bottom:.8rem}
+  .format p{color:var(--muted)}
+  .facts{margin-top:1.5rem;padding-top:1.1rem;background:linear-gradient(var(--gold),var(--gold)) top left/2.5rem 1px no-repeat;font-size:.9rem;color:var(--gold-light)!important}
+  .about{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:center}
+  .portrait{position:relative;aspect-ratio:4/5;background:var(--graphite);overflow:visible}
+  .portrait::after{content:"";position:absolute;inset:1rem -1rem -1rem 1rem;border:1px solid rgba(201,164,92,.45);z-index:-1}
+  .portrait img{overflow:hidden}
+  .about-copy{max-width:54ch}
+  .about-copy .signature{margin-top:2rem;color:var(--gold);font:600 1.15rem var(--serif);letter-spacing:.04em}
+  .dates{background:var(--coal)}
+  .date-row{display:grid;grid-template-columns:11rem 1fr auto;gap:1.5rem;align-items:baseline;padding-block:1.4rem;border-bottom:1px solid rgba(201,164,92,.25)}
+  .date-row:first-of-type{border-top:1px solid rgba(201,164,92,.25)}
+  .date-row time{font:600 1.35rem var(--serif);color:var(--gold-light)}
+  .date-row span{color:var(--muted)} .date-row a{color:var(--gold);text-decoration:none}
+  .date-row a:hover{color:var(--gold-light)}
+  .references{background:var(--black);border-top:1px solid rgba(201,164,92,.12);border-bottom:1px solid rgba(201,164,92,.12)}
+  .sdk-reference{display:grid;grid-template-columns:minmax(220px,.7fr) 1.7fr;gap:4rem;align-items:center;padding:3rem 0;border-top:1px solid rgba(201,164,92,.22);border-bottom:1px solid rgba(201,164,92,.22)}
+  .sdk-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.1rem;padding-right:3rem;border-right:1px solid rgba(201,164,92,.22)}
+  .sdk-brand img{width:min(230px,100%);height:auto;object-fit:contain;filter:brightness(1.08)}
+  .sdk-brand span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .sdk-brand strong{font:600 1.35rem var(--serif);color:var(--gold-light)}
+  .sdk-quote blockquote{padding-left:0;font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.5}
+  .sdk-quote blockquote::before{display:none}
+  .sdk-quote blockquote footer{margin-top:1.5rem;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+  blockquote{position:relative;padding-left:1.8rem;font:500 1.45rem/1.45 var(--serif)}
+  blockquote::before{content:"“";position:absolute;left:0;top:-.25rem;color:var(--gold);font:600 2.2rem var(--serif)}
+  blockquote footer{margin-top:1rem;font:300 .95rem var(--sans);color:var(--muted)}
+  .gallery{background:var(--coal)}
+  .gallery-grid{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:repeat(2,220px);gap:1rem}
+  .shot{position:relative;background:var(--graphite);overflow:hidden}
+  .shot:first-child{grid-row:1/3}
+  .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.28),transparent 45%);opacity:0;transition:opacity .35s}
+  .shot img{transition:transform .6s ease}
+  .shot:hover img{transform:scale(1.04)}
+  .shot:hover::after{opacity:1}
+  .contact{text-align:center;padding-block:8rem;background:radial-gradient(circle at 50% 45%,rgba(201,164,92,.055),transparent 36%)}
+  .contact p{max-width:46ch;margin-inline:auto;color:var(--muted)}
+  .contact .direct{margin-top:2rem;color:var(--text)}
+  .contact .direct a{text-decoration:none;color:var(--gold-light)}
+  .contact .direct a:hover{color:var(--gold)}
+  footer.site{padding-block:2.5rem;text-align:center;color:var(--muted);font-size:.9rem;background:var(--coal);border-top:1px solid rgba(201,164,92,.10)}
+  footer.site a{text-decoration:none} footer.site a:hover{color:var(--gold)}
+  @media(max-width:800px){
+    section{padding-block:4.5rem}.about{grid-template-columns:1fr;gap:3rem}.portrait{width:min(100%,520px)}
+    .format-list,.quotes{grid-template-columns:1fr}.sdk-reference{grid-template-columns:1fr;gap:2.5rem}.sdk-brand{padding-right:0;border-right:0;border-bottom:1px solid rgba(201,164,92,.22);padding-bottom:2rem}.format{min-height:0}.date-row{grid-template-columns:1fr;gap:.3rem}
+    .gallery-grid{grid-template-columns:1fr;grid-template-rows:none}.shot,.shot:first-child{grid-row:auto;aspect-ratio:10/7}
+    nav{gap:1.1rem;font-size:.72rem}.hero-scroll{display:none}
   }
+  @media(max-width:520px){.wrap{width:min(100% - 2rem,1120px)}header .wrap{padding-block:.9rem}.logo{font-size:1.4rem}nav{gap:.7rem}.hero .wrap{padding-block:7rem 4rem}h1{font-size:clamp(2.8rem,14vw,4.5rem)}.lead{font-size:1.05rem}.btn{padding:.9rem 1.8rem}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="wrap">
     <a class="logo" href="#top">Benjamin Miller</a>
     <nav aria-label="Hauptmenü">
-      <a href="#formate">Formate</a>
-      <a href="#ueber-mich">Über mich</a>
-      <a href="#termine">Termine</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#formate">Formate</a><a href="#ueber-mich">Über mich</a><a href="#stimmen">Stimmen</a><a href="#galerie">Galerie</a><a href="#kontakt">Kontakt</a>
     </nav>
   </div>
 </header>
-
 <main id="top">
-
-  <!-- HERO -->
   <div class="hero">
     <img src="bilder/hero.jpg" alt="" onerror="this.remove()">
     <div class="wrap">
+      <div class="eyebrow">Mentalismus &amp; Show</div>
       <h1>Ich weiß, was du gleich denken wirst.</h1>
       <p class="lead">Mentalismus live: Gedanken lesen, Entscheidungen vorhersagen und Gäste zum Staunen bringen.</p>
       <a class="btn" href="#kontakt">Event anfragen</a>
     </div>
+    <div class="hero-scroll">Entdecken</div>
   </div>
 
-  <!-- FORMATE: Angaben zu Gästen und Dauer einfach anpassen -->
   <section id="formate" class="formats">
     <div class="wrap">
-      <h2>Formate</h2>
+      <div class="section-kicker">01 — Auftrittsformate</div>
+      <h2>Für besondere Momente.</h2>
       <div class="format-list">
-        <div class="format">
-          <h3>Close-up</h3>
-          <p>Mentalismus direkt am Tisch, mitten unter deinen Gästen. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p>
-          <p class="facts">Individuell anpassbar an dein Event</p>
-        </div>
-        <div class="format">
-          <h3>Bühnenshow</h3>
-          <p>Ein Programm mit Menschen aus dem Publikum, humorvoll, interaktiv und mit vielen unerklärlichen Momenten.</p>
-          <p class="facts">30 bis 60 Minuten · ab 50 Gästen</p>
-        </div>
-        <div class="format">
-          <h3>Vorträge</h3>
-          <p>Wie wir Menschen lesen: ein Einblick in Körpersprache und Suggestion für Führungskräfte.</p>
-          <p class="facts">Nach Absprache · für Firmen und Gruppen</p>
-        </div>
+        <div class="format"><div class="format-number">01 / 03</div><h3>Close-up</h3><p>Mentalismus direkt am Tisch, mitten unter deinen Gästen. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p><p class="facts">Individuell anpassbar an dein Event</p></div>
+        <div class="format"><div class="format-number">02 / 03</div><h3>Bühnenshow</h3><p>Ein Programm mit Menschen aus dem Publikum, humorvoll, interaktiv und mit vielen unerklärlichen Momenten.</p><p class="facts">30 bis 60 Minuten · ab 50 Gästen</p></div>
+        <div class="format"><div class="format-number">03 / 03</div><h3>Vorträge</h3><p>Wie wir Menschen lesen: ein Einblick in Körpersprache und Suggestion für Führungskräfte.</p><p class="facts">Nach Absprache · für Firmen und Gruppen</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ÜBER MICH -->
   <section id="ueber-mich">
     <div class="wrap about">
-      <div class="portrait">
-        <img src="bilder/portrait.jpg" alt="Porträt von Dein Name" onerror="this.remove()">
-      </div>
-      <div>
-        <h2>Über mich</h2>
+      <div class="portrait"><img src="bilder/portrait.jpg" alt="Porträt von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
+      <div class="about-copy">
+        <div class="section-kicker">02 — Über mich</div>
+        <h2>Die modernste und natürlichste Art der Zauberei.</h2>
         <p>Mein Name ist Benjamin Miller und ich bin Mentalist.</p>
-        <p>Mentalismus verbindet Psychologie, Beobachtung und Showkunst. Die modernste und natürlichste Art der Zauberei</p>
+        <p>Mentalismus verbindet Psychologie, Beobachtung und Showkunst. Dabei entstehen Momente, die sich nicht wie ein klassischer Zaubertrick anfühlen – sondern wie etwas, das eigentlich nicht möglich sein dürfte.</p>
+        <p class="signature">Benjamin Miller · Mentalist</p>
       </div>
     </div>
   </section>
 
-  <!-- TERMINE: Zeilen kopieren oder löschen 
-  <section id="termine" class="dates">
+  <section id="stimmen" class="references">
     <div class="wrap">
-      <h2>Nächste Termine</h2>
-      <div class="date-row">
-        <time datetime="2026-11-14">14. November 2026</time>
-        <span>Veranstaltungsname, Ort</span>
-        <a href="#kontakt">Infos</a>
-      </div>
-      <div class="date-row">
-        <time datetime="2026-12-12">12. Dezember 2026</time>
-        <span>Veranstaltungsname, Ort</span>
-        <a href="#kontakt">Infos</a>
-      </div>
-      <div class="date-row">
-        <time datetime="2027-01-23">23. Januar 2027</time>
-        <span>Veranstaltungsname, Ort</span>
-        <a href="#kontakt">Infos</a>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- STIMMEN: Platzhalter durch echte Kundenstimmen ersetzen -->
-  <section id="stimmen">
-    <div class="wrap">
-      <h2>Stimmen</h2>
-      <div class="quotes">
-        <blockquote>
-          Hier steht eine echte Kundenstimme zu deinem Auftritt.
-          <footer>Name, Anlass</footer>
-        </blockquote>
-        <blockquote>
-          Hier steht eine zweite Kundenstimme.
-          <footer>Name, Anlass</footer>
-        </blockquote>
+      <div class="section-kicker">03 — Referenz</div>
+      <h2>Ein Abend, der in Erinnerung bleibt.</h2>
+      <div class="sdk-reference">
+        <div class="sdk-brand">
+          <img src="bilder/sdk-logo.svg" alt="SDK Süddeutsche Krankenversicherung">
+          <span>100 Jahre Jubiläum · Juni 2026</span>
+          <strong>Show vor 1.300 Gästen</strong>
+        </div>
+        <div class="sdk-quote">
+          <blockquote>Der Auftritt von Benjamin Miller war ein echtes Highlight unserer 100-jährigen Jubiläumsfeier. Mit seiner abwechslungsreichen und mitreißenden Show hat er unsere Mitarbeitenden begeistert, zum Staunen gebracht und einige sogar aktiv auf die Bühne geholt.<br><br>Eine Darbietung, die uns noch lange in Erinnerung bleiben wird. Vielen Dank dafür!<footer>— SDK Süddeutsche Krankenversicherung · Juni 2026</footer></blockquote>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- GALERIE: weitere Bilder = weitere <div class="shot">-Zeilen kopieren -->
   <section id="galerie" class="gallery">
     <div class="wrap">
-      <h2>Galerie</h2>
+      <div class="section-kicker">04 — Galerie</div>
+      <h2>Momente, die man nicht vergisst.</h2>
       <div class="gallery-grid">
-        <div class="shot"><img src="bilder/show-1.jpg" alt="Auftritt 1" loading="lazy" onerror="this.remove()"></div>
-        <div class="shot"><img src="bilder/show-2.jpg" alt="Auftritt 2" loading="lazy" onerror="this.remove()"></div>
-        <div class="shot"><img src="bilder/show-3.jpg" alt="Auftritt 3" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/show-1.jpg" alt="Benjamin Miller bei einem Auftritt" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/show-2.jpg" alt="Mentalismus-Auftritt" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/show-3.jpg" alt="Auftritt von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
       </div>
     </div>
   </section>
 
-  <!-- KONTAKT -->
   <section id="kontakt" class="contact">
     <div class="wrap">
-      <h2>Lust, über dein Event zu sprechen?</h2>
+      <div class="section-kicker">05 — Kontakt</div>
+      <h2>Was werden Ihre Gäste denken?</h2>
       <p>Schreib mir kurz, wann und wo deine Veranstaltung stattfindet und wie viele Gäste kommen. Schick mir gerne auch deine Nummer. Ich melde mich mit einem Vorschlag.</p>
-      <a class="btn" href="mailto:deine@email.de">Jetzt anfragen</a>
+      <a class="btn" href="mailto:benjaminmiller.magic@gmail.com">Jetzt anfragen</a>
       <p class="direct">Oder direkt: <a href="mailto:benjaminmiller.magic@gmail.com">benjaminmiller.magic@gmail.com</a> · <a href="tel:+4915903015903">01590 3015903</a></p>
     </div>
   </section>
 </main>
-
-<footer class="site">
-  <div class="wrap">© 2026 Benjamin Miller · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
-</footer>
-
+<footer class="site"><div class="wrap">© 2026 Benjamin Miller · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div></footer>
 </body>
 </html>
