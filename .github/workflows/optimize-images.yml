@@ -22,10 +22,10 @@ jobs:
 
       - name: Optimize JPEG images
         run: |
-          convert bilder/hero.jpg -strip -interlace Plane -sampling-factor 4:2:0 -quality 82 bilder/hero.jpg
-          convert bilder/show-1.jpg -strip -interlace Plane -sampling-factor 4:2:0 -quality 84 bilder/show-1.jpg
-          convert bilder/show-2.jpg -strip -interlace Plane -sampling-factor 4:2:0 -quality 84 bilder/show-2.jpg
-          convert bilder/show-3.jpg -strip -interlace Plane -sampling-factor 4:2:0 -quality 84 bilder/show-3.jpg
+          convert bilder/hero.jpg -resize '1920x1920>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 78 bilder/hero.jpg
+          convert bilder/show-1.jpg -resize '1600x1600>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 80 bilder/show-1.jpg
+          convert bilder/show-2.jpg -resize '1600x1600>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 80 bilder/show-2.jpg
+          convert bilder/show-3.jpg -resize '1600x1600>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 80 bilder/show-3.jpg
 
       - name: Commit optimized images
         run: |
