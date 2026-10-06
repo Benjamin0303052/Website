@@ -62,6 +62,19 @@
   .format:hover{transform:translateY(-5px);background:#211f1c}
   .format h3{font:600 1.8rem var(--serif);margin-bottom:.8rem}
   .format p{color:var(--muted)}
+  .format-more{margin-top:1.7rem}
+  .format-more summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;cursor:pointer;padding:.85rem 1rem;border:1px solid rgba(201,164,92,.45);color:var(--gold-light);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s}
+  .format-more summary::-webkit-details-marker{display:none}
+  .format-more summary::after{content:"+";font-size:1.2rem;line-height:1;transition:transform .25s ease}
+  .format-more[open] summary::after{transform:rotate(45deg)}
+  .format-more summary:hover{background:rgba(201,164,92,.08);border-color:var(--gold);color:#fff}
+  .format-details{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(201,164,92,.16);animation:detailsIn .3s ease both}
+  @keyframes detailsIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .format-details img{aspect-ratio:3/2;object-fit:cover;margin-bottom:1.2rem;border:1px solid rgba(201,164,92,.2)}
+  .format-details p{font-size:.96rem;color:var(--muted)}
+  .format-details ul{margin:1rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.92rem}
+  .format-details li+li{margin-top:.35rem}
+  .format-details .placeholder-note{margin-top:1rem;color:var(--gold);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
   .facts{margin-top:1.5rem;padding-top:1.1rem;background:linear-gradient(var(--gold),var(--gold)) top left/2.5rem 1px no-repeat;font-size:.9rem;color:var(--gold-light)!important}
   .about{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:center}
   .portrait{position:relative;aspect-ratio:4/5;background:var(--graphite);overflow:visible}
@@ -168,9 +181,62 @@
       <div class="section-kicker">01 — Auftrittsformate</div>
       <h2>Für besondere Momente.</h2>
       <div class="format-list">
-        <div class="format"><h3>Close-up</h3><p>Mentalismus direkt am Tisch, mitten unter deinen Gästen. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p><p class="facts">Individuell anpassbar an dein Event</p></div>
-        <div class="format"><h3>Bühnenshow</h3><p>Ein Programm mit Menschen aus dem Publikum, humorvoll, interaktiv und mit vielen unerklärlichen Momenten.</p><p class="facts">30 bis 60 Minuten · ab 50 Gästen</p></div>
-        <div class="format"><h3>Vorträge</h3><p>Wie wir Menschen lesen: ein Einblick in Körpersprache und Suggestion für Führungskräfte.</p><p class="facts">Nach Absprache · für Firmen und Gruppen</p></div>
+        <div class="format">
+          <h3>Close-up</h3>
+          <p>Mentalismus direkt am Tisch, mitten unter deinen Gästen. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p>
+          <p class="facts">Individuell anpassbar an dein Event</p>
+          <details class="format-more">
+            <summary>Mehr anzeigen</summary>
+            <div class="format-details">
+              <img src="bilder/placeholder-closeup.svg" alt="Platzhalterbild für Close-up" loading="lazy">
+              <p><strong>Platzhaltertext:</strong> Hier kannst du später ausführlicher beschreiben, wie das Close-up-Format abläuft, welche Atmosphäre entsteht und für welche Veranstaltungen es besonders geeignet ist.</p>
+              <ul>
+                <li>Platzhalter für Dauer / Umfang</li>
+                <li>Platzhalter für Gästezahl</li>
+                <li>Platzhalter für besondere Leistungen</li>
+              </ul>
+              <p class="placeholder-note">Bild und Texte später ersetzen</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="format">
+          <h3>Bühnenshow</h3>
+          <p>Ein Programm mit Menschen aus dem Publikum, humorvoll, interaktiv und mit vielen unerklärlichen Momenten.</p>
+          <p class="facts">30 bis 60 Minuten · ab 50 Gästen</p>
+          <details class="format-more">
+            <summary>Mehr anzeigen</summary>
+            <div class="format-details">
+              <img src="bilder/placeholder-stage.svg" alt="Platzhalterbild für Bühnenshow" loading="lazy">
+              <p><strong>Platzhaltertext:</strong> Hier kannst du später die Show ausführlicher vorstellen – beispielsweise Ablauf, Stimmung, Interaktion mit dem Publikum und mögliche Anpassungen an dein Event.</p>
+              <ul>
+                <li>Platzhalter für Showdauer</li>
+                <li>Platzhalter für technische Voraussetzungen</li>
+                <li>Platzhalter für Zielgruppe / Gästezahl</li>
+              </ul>
+              <p class="placeholder-note">Bild und Texte später ersetzen</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="format">
+          <h3>Vorträge</h3>
+          <p>Wie wir Menschen lesen: ein Einblick in Körpersprache und Suggestion für Führungskräfte.</p>
+          <p class="facts">Nach Absprache · für Firmen und Gruppen</p>
+          <details class="format-more">
+            <summary>Mehr anzeigen</summary>
+            <div class="format-details">
+              <img src="bilder/placeholder-talk.svg" alt="Platzhalterbild für Vortrag" loading="lazy">
+              <p><strong>Platzhaltertext:</strong> Hier kannst du später Inhalt, Zielsetzung und Nutzen des Vortrags genauer erklären und beschreiben, was die Teilnehmer konkret mitnehmen.</p>
+              <ul>
+                <li>Platzhalter für Dauer</li>
+                <li>Platzhalter für Inhalte</li>
+                <li>Platzhalter für Zielgruppe / Gruppengröße</li>
+              </ul>
+              <p class="placeholder-note">Bild und Texte später ersetzen</p>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </section>
