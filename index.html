@@ -122,9 +122,9 @@
   blockquote::before{content:"“";position:absolute;left:0;top:-.25rem;color:var(--gold);font:600 2.2rem var(--serif)}
   blockquote footer{margin-top:1rem;font:300 .95rem var(--sans);color:var(--muted)}
   .gallery{background:var(--coal)}
-  .gallery-grid{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:repeat(2,220px);gap:1rem}
-  .shot{position:relative;background:var(--graphite);overflow:hidden}
-  .shot:first-child{grid-row:1/3}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(180px,22vw,270px);gap:1rem}
+  .shot{position:relative;background:var(--graphite);overflow:hidden;min-width:0}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:center}
   .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.28),transparent 45%);opacity:0;transition:opacity .35s}
   .shot img{transition:transform .6s ease}
   .shot:hover img{transform:scale(1.04)}
@@ -152,8 +152,8 @@
     .sdk-brand{padding-right:0;border-right:0;border-bottom:1px solid rgba(201,164,92,.22);padding-bottom:2rem}
     .format{min-height:0}
     .date-row{grid-template-columns:1fr;gap:.3rem}
-    .gallery-grid{grid-template-columns:1fr;grid-template-rows:none}
-    .shot,.shot:first-child{grid-row:auto;aspect-ratio:10/7}
+    .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(145px,30vw,220px);gap:.75rem}
+    .shot,.shot:first-child{grid-row:auto;aspect-ratio:auto}
   }
   @media(max-width:620px){
     .wrap{width:min(100% - 2rem,1120px)}
@@ -177,8 +177,8 @@
     .sdk-reference{padding-block:2rem}
     .sdk-brand img{width:min(240px,82vw)}
     .sdk-quote blockquote{font-size:1.28rem;line-height:1.5}
-    .gallery-grid{gap:.7rem}
-    .shot,.shot:first-child{aspect-ratio:1/1}
+    .gallery-grid{gap:.6rem;grid-auto-rows:clamp(125px,42vw,190px)}
+    .shot,.shot:first-child{aspect-ratio:auto}
     .contact{padding-block:6rem}
     .contact .direct{line-height:2}
   }
@@ -302,9 +302,12 @@
       <div class="section-kicker">04 — Galerie</div>
       <h2>Momente, die man nicht vergisst.</h2>
       <div class="gallery-grid">
-        <div class="shot"><img src="bilder/show-1.jpg" alt="Benjamin Miller bei einem Auftritt" loading="lazy" onerror="this.remove()"></div>
-        <div class="shot"><img src="bilder/show-2.jpg" alt="Mentalismus-Auftritt" loading="lazy" onerror="this.remove()"></div>
-        <div class="shot"><img src="bilder/studio-fullbody.webp" alt="Benjamin Miller im Studio bei einer Balance-Demonstration" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/show-2.jpg" alt="Benjamin Miller bei einem Mentalismus-Auftritt" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/galerie1.jpg" alt="Einblick in die Auftritte von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/galerie2.jpg" alt="Einblick in die Auftritte von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/galerie3.jpg" alt="Einblick in die Auftritte von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/galerie4.jpg" alt="Einblick in die Auftritte von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
+        <div class="shot"><img src="bilder/galerie5.jpg" alt="Einblick in die Auftritte von Benjamin Miller" loading="lazy" onerror="this.remove()"></div>
       </div>
     </div>
   </section>
