@@ -69,8 +69,18 @@
   .format::before{content:"";position:absolute;left:2.2rem;top:0;width:3.2rem;height:1px;background:var(--gold)}
   .format:hover{transform:translateY(-5px);background:#211f1c}
   .format h3{font:600 1.8rem var(--serif);margin-bottom:.8rem}
-  .format p{color:var(--muted)}
+  .format-intro p{color:var(--muted)}
+  .format-intro .facts{margin-top:1.5rem}
   .format-more{margin-top:1.7rem}
+  .format:has(.format-more[open]) .format-intro{display:none}
+  .format:has(.format-more[open]) .format-more{margin-top:0}
+  .format-details{grid-template-columns:minmax(240px,.72fr) minmax(0,1.5fr);column-gap:clamp(1.5rem,3.5vw,3rem);align-items:start}
+  .format-copy{min-width:0;max-width:70ch}
+  .format-copy p{margin-top:0;line-height:1.85}
+  .format-copy p+p{margin-top:1.15rem}
+  .format-copy ul{margin:1.5rem 0 0;padding-left:1.2rem;line-height:1.8}
+  .format-copy .placeholder-note{margin-top:1.5rem}
+  .format-details img{width:100%;height:auto;aspect-ratio:4/5;min-height:0;max-height:680px;object-fit:cover;position:sticky;top:7rem}
   .format-more summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;cursor:pointer;padding:.85rem 1rem;border:1px solid rgba(201,164,92,.45);color:var(--gold-light);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s}
   .format-more summary::-webkit-details-marker{display:none}
   .format-more summary .summary-label::before{content:"Mehr anzeigen"}
@@ -90,15 +100,15 @@
   @keyframes detailsIn{from{opacity:0;transform:translateY(18px);clip-path:inset(0 0 8% 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0)}}
   @keyframes detailImageIn{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes detailTextIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
-  .format-details img{grid-column:1;grid-row:1 / span 4;aspect-ratio:4/3;min-height:300px;object-fit:cover;margin:0;border:1px solid rgba(201,164,92,.24);box-shadow:0 12px 35px rgba(0,0,0,.22)}
+  .format-details img{grid-column:1;grid-row:1;object-fit:cover;margin:0;border:1px solid rgba(201,164,92,.24);box-shadow:0 12px 35px rgba(0,0,0,.22)}
   .format-details img[src*="Vortrg.jpg"]{object-position:center 20%}
-  .format-details p,.format-details ul{grid-column:2}
-  .format-details p{font-size:1rem;color:var(--muted)}
-  .format-details ul{margin:1rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.95rem}
-  .format-details li+li{margin-top:.35rem}
-  .format-details .placeholder-note{margin-top:1.2rem;color:var(--gold);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
-  @media(max-width:800px){.format-list:has(.format-more[open]){display:block}.format:has(.format-more[open]){width:100%}.format-details{grid-template-columns:minmax(0,1fr);row-gap:1.1rem}.format-details img{grid-column:1;grid-row:auto;aspect-ratio:16/9;min-height:0;max-height:420px}.format-details p,.format-details ul{grid-column:1}}
-  @media(prefers-reduced-motion:reduce){.format:has(.format-more[open]),.format-details,.format-details img,.format-details p,.format-details ul{animation:none!important}}
+  .format-copy{grid-column:2}
+  .format-copy p{font-size:1rem;color:var(--muted)}
+  .format-copy ul{color:var(--muted);font-size:.95rem}
+  .format-copy li+li{margin-top:.5rem}
+  .format-copy .placeholder-note{color:var(--gold);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+  @media(max-width:800px){.format-list:has(.format-more[open]){display:block}.format:has(.format-more[open]){width:100%}.format-details{grid-template-columns:minmax(0,1fr);row-gap:1.5rem}.format-details img{grid-column:1;grid-row:auto;aspect-ratio:16/9;min-height:0;max-height:420px;position:static}.format-copy{grid-column:1;max-width:none}}
+  @media(prefers-reduced-motion:reduce){.format:has(.format-more[open]),.format-details,.format-details img,.format-copy p,.format-copy ul{animation:none!important}}
   .facts{margin-top:1.5rem;padding-top:1.1rem;background:linear-gradient(var(--gold),var(--gold)) top left/2.5rem 1px no-repeat;font-size:.9rem;color:var(--gold-light)!important}
   .about{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:center}
   .portrait{position:relative;aspect-ratio:4/5;background:var(--graphite);overflow:visible}
@@ -215,8 +225,8 @@
     .btn{padding:.9rem 1.8rem}
     .format{padding:2.1rem 1.5rem}
     .format h3{font-size:1.7rem}
-    .format p,.format-details p,.format-details ul{color:var(--text);line-height:1.85}
-    .format-details li+li{margin-top:.5rem}
+    .format p,.format-copy p,.format-copy ul{color:var(--text);line-height:1.85}
+    .format-copy li+li{margin-top:.5rem}
     .facts{margin-top:1.25rem}
     .sdk-reference{padding-block:2rem}
     .sdk-brand img{width:min(240px,82vw)}
@@ -255,57 +265,69 @@
       <div class="format-list">
         <div class="format">
           <h3>Close-up</h3>
-          <p>Erlebe Mentalismus direkt am Tisch, mitten unter den Gästen. Die Persönlichste Form der Zauberkunst. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p>
-          <p class="facts">Individuell anpassbar an dein Event</p>
+          <div class="format-intro">
+            <p>Erlebe Mentalismus direkt am Tisch, mitten unter den Gästen. Die Persönlichste Form der Zauberkunst. Ideal für Geburtstage, Hochzeiten und Firmenfeiern.</p>
+            <p class="facts">Individuell anpassbar an dein Event</p>
+          </div>
           <details class="format-more">
             <summary><span class="summary-label">Mehr anzeigen</span></summary>
             <div class="format-details">
               <img src="bilder/closup.jpg" alt="Platzhalterbild für Close-up" loading="lazy">
-              <p>Eine Auswahl der besten Kunststücke aus Mentalmagie und Zauberkunst. Gedanken werden gelesen, scheinbar freie Entscheidungen entpuppen sich als beeinflusst, unmögliche Vorhersagen werden getroffen, etc. </p>
-              <ul>
+              <div class="format-copy">
+                <p>Eine Auswahl der besten Kunststücke aus Mentalmagie und Zauberkunst. Gedanken werden gelesen, scheinbar freie Entscheidungen entpuppen sich als beeinflusst, unmögliche Vorhersagen werden getroffen, etc. </p>
+                <ul>
                 <li>1h - open-end</li>
                 <li>ab 30 Gästen </li>
                 <li>individuell anpassbar</li>
-              </ul>
-              <p class="placeholder-note">Mach dein Event zu etwas Besonderem</p>
+                </ul>
+                <p class="placeholder-note">Mach dein Event zu etwas Besonderem</p>
+              </div>
             </div>
           </details>
         </div>
 
         <div class="format">
           <h3>Bühnenshow</h3>
-          <p>Eine interaktive Show mit vielen Zuschauerinteraktionen. Perfekt geeignet für Firmenfeiern, Hochzeiten und Geburtage. Auch auf Englisch verfügbar!</p>
-          <p class="facts">30 bis 60 Minuten · ab 50 Gästen</p>
+          <div class="format-intro">
+            <p>Eine interaktive Show mit vielen Zuschauerinteraktionen. Perfekt geeignet für Firmenfeiern, Hochzeiten und Geburtage. Auch auf Englisch verfügbar!</p>
+            <p class="facts">30 bis 60 Minuten · ab 50 Gästen</p>
+          </div>
           <details class="format-more">
             <summary><span class="summary-label">Mehr anzeigen</span></summary>
             <div class="format-details">
               <img src="bilder/show-1.jpg" alt="Platzhalterbild für Bühnenshow" loading="lazy">
-              <p>Diese Show führt Sie an die Grenzen des Möglichen und sogar darüber hinaus. Bereiten Sie sich darauf vor, die Gesetze der Logik zu hinterfragen. Die Show beinhaltet ein ausgereiftes Musik- und Tonprogramm, das Spannung und Emotionen untermalt. </p>
-              <ul>
+              <div class="format-copy">
+                <p>Diese Show führt Sie an die Grenzen des Möglichen und sogar darüber hinaus. Bereiten Sie sich darauf vor, die Gesetze der Logik zu hinterfragen. Die Show beinhaltet ein ausgereiftes Musik- und Tonprogramm, das Spannung und Emotionen untermalt. </p>
+                <ul>
                 <li>30 - 60 Minuten</li>
                 <li>ab 50 Gästen</li>
                 <li>Ein Soundsystem muss vorhanden sein!</li>
-              </ul>
-              <p class="placeholder-note">Bringen Sie ihre Gäste zum Staunen</p>
+                </ul>
+                <p class="placeholder-note">Bringen Sie ihre Gäste zum Staunen</p>
+              </div>
             </div>
           </details>
         </div>
 
         <div class="format">
           <h3>Vorträge</h3>
-          <p>Wie wir Menschen lesen: Eine Einführung in die Grundlagen der nonverbalen Kommunikation. Interaktives Seminar mit Spielen und Demonstrationen.</p>
-          <p class="facts">Nach Absprache · für Firmen und Gruppen</p>
+          <div class="format-intro">
+            <p>Wie wir Menschen lesen: Eine Einführung in die Grundlagen der nonverbalen Kommunikation. Interaktives Seminar mit Spielen und Demonstrationen.</p>
+            <p class="facts">Nach Absprache · für Firmen und Gruppen</p>
+          </div>
           <details class="format-more">
             <summary><span class="summary-label">Mehr anzeigen</span></summary>
             <div class="format-details">
               <img src="bilder/Vortrg.jpg" alt="Platzhalterbild für Vortrag" loading="lazy">
-              <p>Lernen Sie, Ihr Umfeld genauer zu beobachten und einzuschätzen. Was denkt Ihr Gesprächspartner? Sind Sie ihm sympathisch? Was denkt er über ein Thema, das Sie ansprechen möchten? Außerdem lernen Sie einige Techniken der Gedankenkunst kennen, etwa die Fähigkeit, sich innerhalb von wenigen Sekunden über 30 zusammenhangslose Wörter zu merken.</p>
-              <ul>
+              <div class="format-copy">
+                <p>Lernen Sie, Ihr Umfeld genauer zu beobachten und einzuschätzen. Was denkt Ihr Gesprächspartner? Sind Sie ihm sympathisch? Was denkt er über ein Thema, das Sie ansprechen möchten? Außerdem lernen Sie einige Techniken der Gedankenkunst kennen, etwa die Fähigkeit, sich innerhalb von wenigen Sekunden über 30 zusammenhangslose Wörter zu merken.</p>
+                <ul>
                 <li>etwa 3 Stunden</li>
                 <li>für Führungskräfte, Firmen und Interessierte</li>
                 <li>Seminarraum wird benötigt.</li>
-              </ul>
-              <p class="placeholder-note">Lernen Sie Menschen zu lesen.</p>
+                </ul>
+                <p class="placeholder-note">Lernen Sie Menschen zu lesen.</p>
+              </div>
             </div>
           </details>
         </div>
