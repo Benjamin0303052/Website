@@ -145,6 +145,24 @@
   .contact-form-note a{color:var(--gold-light)}
   .contact-status{min-height:1.5rem;margin-top:1rem;font-size:.95rem;color:var(--gold-light)}
   .contact-status.error{color:#f0a39a}
+  .contact-status.success{position:relative;isolation:isolate;overflow:hidden;min-height:0;margin:1.5rem 0 0;padding:clamp(1.5rem,4vw,2.8rem) 1.25rem;text-align:center;border:1px solid rgba(230,205,145,.75);background:radial-gradient(ellipse at 50% 0%,rgba(201,164,92,.2),transparent 68%),linear-gradient(145deg,rgba(201,164,92,.10),rgba(15,15,14,.96));box-shadow:0 0 0 1px rgba(201,164,92,.08),0 18px 55px rgba(0,0,0,.35);animation:successCardIn .75s cubic-bezier(.16,1,.3,1) both}
+  .contact-status.success .success-mark{display:grid;place-items:center;width:clamp(4.5rem,12vw,6.5rem);aspect-ratio:1;margin:0 auto 1.1rem;border-radius:50%;border:1px solid var(--gold-light);background:linear-gradient(145deg,#e6cd91,#b8893a);color:#080807;box-shadow:0 0 0 8px rgba(201,164,92,.08),0 0 48px rgba(201,164,92,.28);animation:successMarkIn .75s .12s cubic-bezier(.16,1,.3,1) both}
+  .contact-status.success .success-mark svg{width:52%;height:52%;stroke-dasharray:45;stroke-dashoffset:45;animation:successCheck .55s .65s ease forwards}
+  .contact-status.success strong{display:block;font:600 clamp(1.8rem,5vw,2.8rem)/1.05 var(--serif);color:var(--gold-light);margin-bottom:.75rem}
+  .contact-status.success .success-copy{max-width:36rem;margin:0 auto;color:var(--text);font-size:1.02rem;line-height:1.65}
+  .contact-status.success .success-small{display:block;margin-top:1rem;color:var(--muted);font-size:.85rem}
+  .success-spark{position:absolute;z-index:-1;top:12%;left:50%;width:7px;height:7px;border-radius:2px;background:var(--gold-light);opacity:0;animation:successSpark 1.25s ease-out var(--delay,0s) both}
+  .success-spark:nth-of-type(1){--x:-125px;--y:-65px;--r:35deg;--delay:.05s}
+  .success-spark:nth-of-type(2){--x:135px;--y:-55px;--r:80deg;--delay:.12s}
+  .success-spark:nth-of-type(3){--x:-180px;--y:35px;--r:10deg;--delay:.18s}
+  .success-spark:nth-of-type(4){--x:175px;--y:45px;--r:60deg;--delay:.08s}
+  .success-spark:nth-of-type(5){--x:-75px;--y:100px;--r:20deg;--delay:.22s}
+  .success-spark:nth-of-type(6){--x:85px;--y:95px;--r:70deg;--delay:.16s}
+  @keyframes successCardIn{from{opacity:0;transform:translateY(22px) scale(.97);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+  @keyframes successMarkIn{0%{opacity:0;transform:scale(.25) rotate(-30deg)}70%{transform:scale(1.12) rotate(5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+  @keyframes successCheck{to{stroke-dashoffset:0}}
+  @keyframes successSpark{0%{opacity:0;transform:translate(0,0) rotate(0) scale(.3)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1.3)}}
+  @media(prefers-reduced-motion:reduce){.contact-status.success,.contact-status.success .success-mark,.contact-status.success .success-mark svg,.success-spark{animation:none!important}.contact-status.success .success-mark svg{stroke-dashoffset:0}}
   .contact-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
   @media(max-width:620px){.contact-form-grid{grid-template-columns:1fr;gap:1rem}.contact-field.full{grid-column:auto}.contact-form{padding:1.15rem}.contact-form .btn{width:100%;text-align:center}}
 
@@ -390,7 +408,9 @@
       const result = await response.json();
       if (response.ok && result.success) {
         contactForm.reset();
-        contactStatus.textContent = 'Vielen Dank! Ihre Anfrage wurde gesendet. Ich melde mich zeitnah bei Ihnen.';
+        contactStatus.classList.add('success');
+        contactStatus.innerHTML = '<span class="success-spark" aria-hidden="true"></span><span class="success-spark" aria-hidden="true"></span><span class="success-spark" aria-hidden="true"></span><span class="success-spark" aria-hidden="true"></span><span class="success-spark" aria-hidden="true"></span><span class="success-spark" aria-hidden="true"></span><span class="success-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 25l9 9L38 14"/></svg></span><strong>Geschafft! Anfrage gesendet.</strong><span class="success-copy">Vielen Dank für Ihre Nachricht. Ihre Anfrage ist bei mir eingegangen – ich melde mich zeitnah persönlich bei Ihnen.</span><span class="success-small">Sie können dieses Fenster geöffnet lassen oder die Seite weiter erkunden.</span>';
+        contactStatus.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
       } else throw new Error(result.message || 'Versand nicht möglich');
     } catch (error) {
       contactStatus.classList.add('error');
