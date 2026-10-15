@@ -222,12 +222,14 @@
     .shot,.shot:first-child{grid-row:auto;aspect-ratio:auto}
   }
   @media(max-width:620px){
+    section{padding-block:4rem}
+    .about{gap:2.25rem}
     .wrap{width:min(100% - 2rem,1120px)}
     header .wrap{padding-block:.25rem}
     .logo{font-size:1.45rem}
-    .menu-toggle{display:block;order:2}
+    .menu-toggle{display:grid;place-content:center;order:2;min-width:48px;min-height:48px}
     nav{position:absolute;top:100%;left:0;right:0;display:flex;flex-direction:column;gap:0;padding:.55rem 1rem 1rem;background:rgba(5,5,5,.97);border-bottom:1px solid rgba(201,164,92,.18);box-shadow:0 18px 35px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility .25s}
-    nav a{padding:.72rem .25rem;font-size:.76rem;letter-spacing:.12em;border-bottom:1px solid rgba(201,164,92,.08)}
+    nav a{display:flex;align-items:center;min-height:48px;padding:.72rem .25rem;font-size:.76rem;letter-spacing:.12em;border-bottom:1px solid rgba(201,164,92,.08)}
     nav a:last-child{border-bottom:0}
     header.menu-open nav{opacity:1;visibility:visible;transform:none}
     header.menu-open .menu-toggle span:nth-child(1){transform:translateY(.38rem) rotate(45deg)}
@@ -235,19 +237,23 @@
     header.menu-open .menu-toggle span:nth-child(3){transform:translateY(-.38rem) rotate(-45deg)}
     .hero .wrap{padding-block:7rem 4rem}
     h1{font-size:clamp(2.75rem,14vw,4.5rem);max-width:11ch}
-    .lead{font-size:1.02rem;line-height:1.65}
-    .btn{padding:.9rem 1.8rem}
-    .format{padding:2.1rem 1.5rem}
+    .lead{font-size:1.05rem;font-weight:400;line-height:1.7}
+    .btn{min-height:48px;padding:.9rem 1.8rem;display:inline-flex;align-items:center;justify-content:center;line-height:1.4}
+    .format{padding:1.8rem 1.25rem}
     .format h3{font-size:1.7rem}
     .format p,.format-copy p,.format-copy ul{color:var(--text);line-height:1.85}
     .format-copy li+li{margin-top:.5rem}
+    .format-cta{font-size:.9rem;line-height:1.45}
     .facts{margin-top:1.25rem}
     .sdk-reference{gap:1.5rem}
     .sdk-brand img{width:min(280px,82vw)}
     .sdk-quote blockquote{font-size:1.25rem;line-height:1.55}
     .gallery-grid{gap:.6rem;grid-auto-rows:clamp(125px,42vw,190px)}
     .shot,.shot:first-child{aspect-ratio:auto}
-    .contact{padding-block:6rem}
+    .contact{padding-block:5rem}
+    .contact p,.date-row span,.contact-form-note,.instagram-link small,footer.site{font-weight:400}
+    .contact-form-note{font-size:.9rem;line-height:1.65}
+    .instagram-link small{font-size:.8rem}
     .contact .direct{line-height:2}
   }
   
