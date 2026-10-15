@@ -58,10 +58,11 @@
   .hero-description{max-width:55ch;margin-top:1.25rem;color:var(--text);font-size:1.05rem;line-height:1.75;animation:rise 1.3s .3s cubic-bezier(.2,.7,.2,1) both}
   .hero-audiences{margin-top:.8rem;color:var(--gold-light);font-size:.95rem;letter-spacing:.025em;animation:rise 1.3s .35s cubic-bezier(.2,.7,.2,1) both}
   .format-cta{margin-top:1.8rem;font-size:.82rem;letter-spacing:.035em;text-align:center}
+  .format-cta:focus-visible,.contact-form .btn:focus-visible,.format-more summary:focus-visible{outline-offset:4px}
   @media(max-width:620px){.hero-description{font-size:.98rem;line-height:1.7}.hero-audiences{font-size:.88rem}}
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   @media(prefers-reduced-motion:reduce){h1,.lead,.hero .btn,.reveal{animation:none;transition:none}.hero>img{transform:none}html{scroll-behavior:auto}}
-  .btn{display:inline-block;margin-top:2.2rem;padding:1rem 2.5rem;background:var(--gold-gradient);color:var(--black);font-weight:500;letter-spacing:.08em;text-decoration:none;box-shadow:0 10px 35px rgba(0,0,0,.28);transition:transform .25s,filter .25s,box-shadow .25s}
+  .btn{display:inline-block;min-height:3rem;margin-top:2.2rem;padding:1rem 2.5rem;background:var(--gold-gradient);color:var(--black);font-weight:500;letter-spacing:.08em;text-decoration:none;box-shadow:0 10px 35px rgba(0,0,0,.28);transition:transform .25s,filter .25s,box-shadow .25s}
   .btn:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,.38)}
   section{padding-block:7rem}
   h2{font:500 clamp(2rem,4.5vw,3.2rem)/1.05 var(--serif);margin-bottom:2rem;color:var(--gold-light)}
@@ -76,8 +77,8 @@
   .format-intro p{color:var(--muted)}
   .format-intro .facts{margin-top:1.5rem}
   .format-more{margin-top:1.7rem}
-  .format:has(.format-more[open]) .format-intro{display:none}
-  .format:has(.format-more[open]) .format-more{margin-top:0}
+  .format.is-expanded .format-intro{display:none}
+  .format.is-expanded .format-more{margin-top:0}
   .format-details{grid-template-columns:minmax(240px,.72fr) minmax(0,1.5fr);column-gap:clamp(1.5rem,3.5vw,3rem);align-items:start}
   .format-copy{min-width:0;max-width:70ch}
   .format-copy p{margin-top:0;line-height:1.85}
@@ -85,18 +86,15 @@
   .format-copy ul{margin:1.5rem 0 0;padding-left:1.2rem;line-height:1.8}
   .format-copy .placeholder-note{margin-top:1.5rem}
   .format-details img{width:100%;height:auto;aspect-ratio:4/5;min-height:0;max-height:680px;object-fit:cover;position:sticky;top:7rem}
-  .format-more summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;cursor:pointer;padding:.85rem 1rem;border:1px solid rgba(201,164,92,.45);color:var(--gold-light);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s}
+  .format-more summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3rem;list-style:none;cursor:pointer;padding:.75rem 1rem;border:1px solid rgba(201,164,92,.45);color:var(--gold-light);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
   .format-more summary::-webkit-details-marker{display:none}
-  .format-more summary .summary-label::before{content:"Mehr anzeigen"}
-  .format-more[open] summary .summary-label::before{content:"Weniger anzeigen"}
-  .format-more summary .summary-label{font-size:0}
-  .format-more summary .summary-label::before{font-size:.82rem}
-  .format-more summary::after{content:"+";font-size:1.2rem;line-height:1;transition:transform .25s ease}
-  .format-more[open] summary::after{transform:rotate(45deg)}
+  .format-more summary .summary-label{font-size:.82rem}
+  .format-more summary::after{content:"+";font-size:1.2rem;line-height:1;transition:transform .2s ease}
+  .format-more summary[aria-expanded="true"]::after{transform:rotate(45deg)}
   .format-more summary:hover{background:rgba(201,164,92,.08);border-color:var(--gold);color:#fff}
-  .format-list:has(.format-more[open]){display:block;background:transparent}
-  .format-list:has(.format-more[open])>.format:not(:has(.format-more[open])){display:none}
-  .format:has(.format-more[open]){width:100%;min-height:0;z-index:2;background:#211f1c;box-shadow:0 22px 60px rgba(0,0,0,.32);padding:clamp(2rem,4vw,3.25rem);transform-origin:top center;animation:formatExpand .22s cubic-bezier(.2,.7,.2,1) both}
+  .format-list.is-expanded{display:block;background:transparent}
+  .format-list.is-expanded>.format:not(.is-expanded){display:none}
+  .format.is-expanded{width:100%;min-height:0;z-index:2;background:#211f1c;box-shadow:0 22px 60px rgba(0,0,0,.32);padding:clamp(2rem,4vw,3.25rem);transform-origin:top center;animation:formatExpand .22s cubic-bezier(.2,.7,.2,1) both}
   .format.is-closing{animation:formatCollapse .2s cubic-bezier(.4,0,.8,.3) both;pointer-events:none}
   .format-more.is-closing .format-details{animation:detailsOut .16s ease-in both}
   .format-more.is-closing .format-details img{animation:detailImageOut .16s ease-in both}
@@ -119,8 +117,8 @@
   .format-copy ul{color:var(--muted);font-size:.95rem}
   .format-copy li+li{margin-top:.5rem}
   .format-copy .placeholder-note{color:var(--gold);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
-  @media(max-width:800px){.format-list:has(.format-more[open]){display:block}.format:has(.format-more[open]){width:100%}.format-details{grid-template-columns:minmax(0,1fr);row-gap:1.5rem}.format-details img{grid-column:1;grid-row:auto;aspect-ratio:16/9;min-height:0;max-height:420px;position:static}.format-copy{grid-column:1;max-width:none}}
-  @media(prefers-reduced-motion:reduce){.format:has(.format-more[open]),.format.is-closing,.format-details,.format-details img,.format-copy,.format-copy p,.format-copy ul{animation:none!important}}
+  @media(max-width:800px){.format-list.is-expanded{display:block}.format.is-expanded{width:100%}.format-details{grid-template-columns:minmax(0,1fr);row-gap:1.5rem}.format-details img{grid-column:1;grid-row:auto;aspect-ratio:16/9;min-height:0;max-height:420px;position:static}.format-copy{grid-column:1;max-width:none}}
+  @media(prefers-reduced-motion:reduce){.format.is-expanded,.format.is-closing,.format-details,.format-details img,.format-copy,.format-copy p,.format-copy ul{animation:none!important}}
   .facts{margin-top:1.5rem;padding-top:1.1rem;background:linear-gradient(var(--gold),var(--gold)) top left/2.5rem 1px no-repeat;font-size:.9rem;color:var(--gold-light)!important}
   .about{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:center}
   .portrait{position:relative;aspect-ratio:4/5;background:var(--graphite);overflow:visible}
@@ -135,9 +133,9 @@
   .date-row span{color:var(--muted)} .date-row a{color:var(--gold);text-decoration:none}
   .date-row a:hover{color:var(--gold-light)}
   .references{background:var(--black);border-top:1px solid rgba(201,164,92,.12);border-bottom:1px solid rgba(201,164,92,.12)}
-  .sdk-reference{display:grid;grid-template-columns:minmax(220px,.7fr) 1.7fr;gap:4rem;align-items:center;padding:3rem 0;border-top:1px solid rgba(201,164,92,.22);border-bottom:1px solid rgba(201,164,92,.22)}
+  .sdk-reference{display:grid;grid-template-columns:minmax(240px,.8fr) 1.7fr;gap:clamp(2.5rem,5vw,4.5rem);align-items:center;padding:3rem 0;border-top:1px solid rgba(201,164,92,.22);border-bottom:1px solid rgba(201,164,92,.22)}
   .sdk-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.1rem;padding-right:3rem;border-right:1px solid rgba(201,164,92,.22)}
-  .sdk-brand img{width:min(300px,100%);height:auto;object-fit:contain;filter:brightness(1.08)}
+  .sdk-brand img{width:min(360px,100%);height:auto;object-fit:contain;filter:brightness(1.08)}
   .sdk-brand span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .sdk-brand strong{font:600 1.35rem var(--serif);color:var(--gold-light)}
   .sdk-quote blockquote{padding-left:0;font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.5}
@@ -163,11 +161,12 @@
   .contact-field{display:flex;flex-direction:column;gap:.45rem;min-width:0}
   .contact-field.full{grid-column:1/-1}
   .contact-field label{font-size:.86rem;letter-spacing:.035em;color:var(--text)}
-  .contact-field input,.contact-field select,.contact-field textarea{width:100%;min-height:3.1rem;padding:.8rem .9rem;border:1px solid rgba(201,164,92,.28);border-radius:0;background:#0b0b0a;color:var(--text);font:400 1rem var(--sans)}
+  .contact-field input,.contact-field select,.contact-field textarea{width:100%;min-height:3.25rem;padding:.8rem .9rem;border:1px solid rgba(201,164,92,.28);border-radius:0;background:#0b0b0a;color:var(--text);font:400 1rem var(--sans)}
   .contact-field textarea{min-height:150px;resize:vertical}
   .contact-field input::placeholder,.contact-field textarea::placeholder{color:#817b70}
   .contact-field input:focus,.contact-field select:focus,.contact-field textarea:focus{outline:2px solid var(--gold);outline-offset:2px;border-color:var(--gold)}
-  .contact-form .btn{border:0;cursor:pointer;font:500 .95rem var(--sans);margin-top:1.4rem}
+  .contact-form .btn{border:0;cursor:pointer;font:500 .95rem var(--sans);margin-top:1.4rem;min-height:3.2rem;padding-inline:2rem}
+  .contact-form .btn:disabled{cursor:wait;opacity:.72}
   .contact-form-note{font-size:.82rem;color:var(--muted);line-height:1.55;margin-top:1rem}
   .contact-form-note a{color:var(--gold-light)}
   .contact-status{min-height:1.5rem;margin-top:1rem;font-size:.95rem;color:var(--gold-light)}
@@ -212,8 +211,9 @@
     .about{grid-template-columns:1fr;gap:3rem}
     .portrait{width:min(100%,520px)}
     .format-list{grid-template-columns:1fr}
-    .sdk-reference{grid-template-columns:1fr;gap:2.5rem}
-    .sdk-brand{padding-right:0;border-right:0;border-bottom:1px solid rgba(201,164,92,.22);padding-bottom:2rem}
+    .sdk-reference{grid-template-columns:1fr;gap:2rem}
+    .sdk-brand{align-items:center;padding:0 0 2rem;border-right:0;border-bottom:1px solid rgba(201,164,92,.22)}
+    .sdk-quote blockquote{max-width:65ch;margin-inline:auto}
     .format{min-height:0}
     .date-row{grid-template-columns:1fr;gap:.3rem}
     .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(145px,30vw,220px);gap:.75rem}
@@ -235,13 +235,17 @@
     h1{font-size:clamp(2.75rem,14vw,4.5rem);max-width:11ch}
     .lead{font-size:1.02rem;line-height:1.65}
     .btn{padding:.9rem 1.8rem}
-    .format{padding:2.1rem 1.5rem}
+    .format{padding:2rem 1.25rem}
+    .format.is-expanded{padding:1.5rem 1.1rem}
     .format h3{font-size:1.7rem}
+    .format-details{margin-top:1.1rem;padding-top:1.1rem;row-gap:1.1rem}
+    .format-details img{aspect-ratio:16/10;max-height:360px}
+    .format-copy .btn{width:100%;text-align:center}
     .format p,.format-copy p,.format-copy ul{color:var(--text);line-height:1.85}
     .format-copy li+li{margin-top:.5rem}
     .facts{margin-top:1.25rem}
     .sdk-reference{padding-block:2rem}
-    .sdk-brand img{width:min(240px,82vw)}
+    .sdk-brand img{width:min(300px,86vw)}
     .sdk-quote blockquote{font-size:1.28rem;line-height:1.5}
     .gallery-grid{gap:.6rem;grid-auto-rows:clamp(125px,42vw,190px)}
     .shot,.shot:first-child{aspect-ratio:auto}
@@ -295,7 +299,7 @@
                 <li>Für kleine Gesellschaften ebenso wie größere Veranstaltungen</li>
                 <li>Individuell auf Anlass und Gäste zugeschnitten</li>
                 </ul>
-                <a class="btn format-cta" href="#kontakt">Close-up für mein Event anfragen</a>
+                <a class="btn format-cta" href="#kontakt" data-event-type="Close-up-Mentalismus">Close-up für mein Event anfragen</a>
               </div>
             </div>
           </details>
@@ -319,7 +323,7 @@
                 <li>Ab 50 Gästen</li>
                 <li>Ein Soundsystem muss vor Ort vorhanden sein</li>
                 </ul>
-                <a class="btn format-cta" href="#kontakt">Bühnenshow für mein Event anfragen</a>
+                <a class="btn format-cta" href="#kontakt" data-event-type="Bühnenshow">Bühnenshow für mein Event anfragen</a>
               </div>
             </div>
           </details>
@@ -343,7 +347,7 @@
                 <li>Für Unternehmen, Teams, Führungskräfte und interessierte Gruppen</li>
                 <li>Ein geeigneter Seminarraum wird benötigt</li>
                 </ul>
-                <a class="btn format-cta" href="#kontakt">Vortrag oder Seminar anfragen</a>
+                <a class="btn format-cta" href="#kontakt" data-event-type="Vortrag / Seminar">Vortrag oder Seminar anfragen</a>
               </div>
             </div>
           </details>
@@ -403,7 +407,7 @@
         <div class="contact-form-grid">
           <div class="contact-field"><label for="contact-name">Dein Name *</label><input id="contact-name" name="name" autocomplete="name" required maxlength="120" placeholder="Vor- und Nachname"></div>
           <div class="contact-field"><label for="contact-email">Deine E-Mail-Adresse *</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@beispiel.de"></div>
-          <div class="contact-field"><label for="contact-event">Art der Veranstaltung *</label><select id="contact-event" name="Veranstaltungsart" required><option value="" selected disabled>Bitte auswählen</option><option>Firmenveranstaltung</option><option>Hochzeit</option><option>Geburtstag / private Feier</option><option>Bühnenshow</option><option>Vortrag / Seminar</option><option>Sonstiges</option></select></div>
+          <div class="contact-field"><label for="contact-event">Art der Veranstaltung *</label><select id="contact-event" name="Veranstaltungsart" required><option value="" selected disabled>Bitte auswählen</option><option>Firmenveranstaltung</option><option>Close-up-Mentalismus</option><option>Hochzeit</option><option>Geburtstag / private Feier</option><option>Bühnenshow</option><option>Vortrag / Seminar</option><option>Sonstiges</option></select></div>
           <div class="contact-field"><label for="contact-date">Veranstaltungsdatum</label><input id="contact-date" name="Veranstaltungsdatum" type="date"></div>
           <div class="contact-field"><label for="contact-guests">Anzahl der Gäste (optional)</label><input id="contact-guests" name="Anzahl der Gäste" inputmode="numeric" maxlength="6" placeholder="z. B. 80"></div>
           <div class="contact-field full"><label for="contact-message">Deine Nachricht *</label><textarea id="contact-message" name="message" required maxlength="5000" placeholder="Erzähl mir kurz von deiner Veranstaltung und deinen Vorstellungen …"></textarea></div>
@@ -428,10 +432,21 @@
   const revealItems = document.querySelectorAll('.reveal');
   const formatDetails = document.querySelectorAll('.format-more');
 
-  // Animate opening and closing while keeping only one format expanded at a time.
-  formatDetails.forEach(details => {
+  // Keep format disclosure state in sync for assistive technology and rapid input.
+  const formatList = document.querySelector('.format-list');
+  formatDetails.forEach((details, index) => {
     const summary = details.querySelector('summary');
+    const label = summary.querySelector('.summary-label');
     const card = details.closest('.format');
+    const heading = card.querySelector('h3');
+    const panel = details.querySelector('.format-details');
+    const id = `format-details-${index + 1}`;
+    heading.id = `format-heading-${index + 1}`;
+    panel.id = id;
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-labelledby', heading.id);
+    summary.setAttribute('aria-controls', id);
+    summary.setAttribute('aria-expanded', 'false');
     summary.addEventListener('click', event => {
       event.preventDefault();
       if (details.classList.contains('is-closing')) return;
@@ -440,32 +455,53 @@
         return;
       }
       formatDetails.forEach(other => {
-        if (other !== details && other.open) closeFormat(other);
+        if (other !== details && other.open) closeFormat(other, true);
       });
       details.open = true;
+      card.classList.add('is-expanded');
       card.classList.remove('is-closing');
-      // Restart entrance animation when a format is opened again.
+      formatList.classList.add('is-expanded');
+      summary.setAttribute('aria-expanded', 'true');
+      label.textContent = 'Weniger anzeigen';
       card.style.animation = 'none';
       void card.offsetWidth;
       card.style.animation = '';
     });
   });
 
-  function closeFormat(details) {
+  function closeFormat(details, immediate = false) {
     const card = details.closest('.format');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const summary = details.querySelector('summary');
+    const label = summary.querySelector('.summary-label');
+    window.clearTimeout(details.closeTimer);
+    if (immediate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       details.open = false;
-      card.classList.remove('is-closing');
+      details.classList.remove('is-closing');
+      card.classList.remove('is-closing', 'is-expanded');
+      summary.setAttribute('aria-expanded', 'false');
+      label.textContent = 'Mehr anzeigen';
+      if (!document.querySelector('.format-more[open]')) formatList.classList.remove('is-expanded');
       return;
     }
     details.classList.add('is-closing');
     card.classList.add('is-closing');
-    window.setTimeout(() => {
+    summary.setAttribute('aria-expanded', 'false');
+    label.textContent = 'Weniger anzeigen';
+    details.closeTimer = window.setTimeout(() => {
       details.open = false;
       details.classList.remove('is-closing');
-      card.classList.remove('is-closing');
+      card.classList.remove('is-closing', 'is-expanded');
+      label.textContent = 'Mehr anzeigen';
+      if (!document.querySelector('.format-more[open]')) formatList.classList.remove('is-expanded');
     }, 220);
   }
+
+  document.querySelectorAll('.format-cta[data-event-type]').forEach(link => {
+    link.addEventListener('click', () => {
+      const eventType = document.querySelector('#contact-event');
+      if (eventType) eventType.value = link.dataset.eventType;
+    });
+  });
 
 
   const contactForm = document.querySelector('#contact-form');
@@ -493,7 +529,7 @@
       } else throw new Error(result.message || 'Versand nicht möglich');
     } catch (error) {
       contactStatus.classList.add('error');
-      contactStatus.textContent = 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt an kontakt@benjamin-miller.de.';
+      contactStatus.textContent = 'Die Anfrage konnte nicht gesendet werden. Schreib mir direkt an kontakt@benjamin-miller.de.';
     } finally {
       contactSubmit.disabled = false;
       contactSubmit.textContent = 'Anfrage senden';
