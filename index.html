@@ -465,6 +465,17 @@
   const revealItems = document.querySelectorAll('.reveal');
   const formatDetails = document.querySelectorAll('.format-more');
 
+  function scrollFormatIntoView(card) {
+    if (!window.matchMedia('(max-width: 800px)').matches) return;
+
+    window.requestAnimationFrame(() => {
+      const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+      const top = window.scrollY + card.getBoundingClientRect().top - headerBottom - 12;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top: Math.max(0, top), behavior: reducedMotion ? 'auto' : 'smooth'});
+    });
+  }
+
   // Keep format details mutually exclusive and expose their state to assistive technology.
   formatDetails.forEach((details, index) => {
     const summary = details.querySelector('summary');
@@ -499,6 +510,7 @@
       card.style.animation = 'none';
       void card.offsetWidth;
       card.style.animation = '';
+      scrollFormatIntoView(card);
     });
   });
 
