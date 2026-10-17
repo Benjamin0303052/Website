@@ -56,7 +56,10 @@
   .lead{max-width:44ch;margin-top:1.6rem;font-size:1.2rem;color:var(--muted);animation:rise 1.3s .2s cubic-bezier(.2,.7,.2,1) both}
   .hero .btn{animation:rise 1.3s .4s cubic-bezier(.2,.7,.2,1) both}
   .hero-description{max-width:55ch;margin-top:1.25rem;color:var(--text);font-size:1.05rem;line-height:1.75;animation:rise 1.3s .3s cubic-bezier(.2,.7,.2,1) both}
+  .hero-location{margin-bottom:1.1rem;color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;animation:rise 1.3s .05s cubic-bezier(.2,.7,.2,1) both}
   .hero-audiences{margin-top:.8rem;color:var(--gold-light);font-size:.95rem;letter-spacing:.025em;animation:rise 1.3s .35s cubic-bezier(.2,.7,.2,1) both}
+  .hero-region{display:flex;align-items:center;gap:.55rem;margin-top:.8rem;color:var(--gold-light);font-size:.92rem;letter-spacing:.025em;animation:rise 1.3s .4s cubic-bezier(.2,.7,.2,1) both}
+  .hero-region span{font-size:1.15rem;color:var(--gold)}
   .format-cta{margin-top:1.8rem;font-size:.82rem;letter-spacing:.035em;text-align:center}
   @media(max-width:620px){.hero-description{font-size:.98rem;line-height:1.7}.hero-audiences{font-size:.88rem}}
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -313,10 +316,12 @@
   <div class="hero">
     <img src="bilder/hero.jpg" alt="" onerror="this.remove()">
     <div class="wrap">
+      <p class="hero-location">Künstler aus Erlangen</p>
       <h1>Ich weiß, was du gleich denken wirst.</h1>
       <p class="lead">Gedanken lesen. Entscheidungen beeinflussen. Das Unmögliche möglich erscheinen lassen.</p>
       <p class="hero-description">Ich bin Benjamin Miller, Mentalist. Ich mache Gedankenexperimente zu unvergesslichen Erlebnissen.</p>
       <p class="hero-audiences">Für Firmenfeiern, Galas, Hochzeiten, Geburtstage und besondere Anlässe.</p>
+      <p class="hero-region"><span aria-hidden="true">⌖</span> Bayern und deutschlandweit buchbar</p>
       <a class="btn" href="#kontakt">Dein Event anfragen</a>
     </div>
   </div>
@@ -410,6 +415,7 @@
         <p>Ich bin Benjamin Miller, Mentalist. Mich fasziniert die Mentalmagie, weil dabei die Grenze zwischen Zauberkunst und echter Psychologie verschwimmt.</p>
         <p>Meine Auftritte verbinden Zauberkunst, Psychologie, Menschenkenntnis und Showmanship. Ob auf einer Bühne vor großem Publikum oder direkt zwischen den Gästen, mir geht es darum, Menschen nicht nur zu überraschen, sondern sie Teil des Erlebnisses werden zu lassen.</p>
         <p>Von Firmenveranstaltungen bis zu privaten Feiern ist jedes Event anders. Deshalb soll auch der Auftritt zu dir, deinen Gästen und dem Anlass passen.</p>
+        <p>Als Künstler aus Erlangen bin ich für Veranstaltungen in ganz Bayern und deutschlandweit buchbar.</p>
         <p>Neugierig, was bei deinem Event möglich ist? Lass uns darüber sprechen.</p>
         <p class="signature">Benjamin Miller · Mentalist</p>
       </div>
