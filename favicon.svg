@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <defs><clipPath id="circle"><circle cx="50" cy="50" r="49"/></clipPath></defs>
-  <circle cx="50" cy="50" r="49" fill="#ffffff"/>
-  <image href="/bilder/logo-original.png" x="1" y="1" width="98" height="98" preserveAspectRatio="xMidYMid meet" clip-path="url(#circle)"/>
-</svg>
